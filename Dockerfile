@@ -28,11 +28,11 @@ EXPOSE 8080
 
 ENTRYPOINT [ \
     "java", \
-    "-Dmysql_host=${STREAMA_MYSQL_HOST:-localhost}", \
-    "-Dmysql_port=${STREAMA_MYSQL_PORT:-3306}", \
-    "-Dmysql_db=${STREAMA_MYSQL_DB:-streama}", \
-    "-Dmysql_user=${STREAMA_MYSQL_USER:-streama}", \
-    "-Dmysql_password=${STREAMA_MYSQL_PASSWORD:-streama}", \
+    "-Dmysql_host=${STREAMA_MYSQL_HOST:localhost}", \
+    "-Dmysql_port=${STREAMA_MYSQL_PORT:3306}", \
+    "-Dmysql_db=${STREAMA_MYSQL_DB:streama}", \
+    "-Dmysql_user=${STREAMA_MYSQL_USER:streama}", \
+    "-Dmysql_password=${STREAMA_MYSQL_PASSWORD:streama}", \
     "-jar", \
     "/app/streama.jar" \
 ]
