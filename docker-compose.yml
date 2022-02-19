@@ -1,0 +1,40 @@
+# Copyright: (c) 2022, Justin Béra (@just1not2) <me@just1not2.org>
+# Apache License 2.0 (see LICENSE or https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+version: "3"
+
+volumes:
+  database_data:
+  media_data:
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    hostname: mysql
+    restart: always
+    volumes:
+      - database_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: streama
+      MYSQL_USER: streama
+      MYSQL_PASSWORD: streama
+      MYSQL_RANDOM_ROOT_PASSWORD: true
+
+  streama:
+    image: just1not2/streama:latest
+    container_name: streama
+    hostname: streama
+    restart: always
+    volumes:
+      - media_data:/data/streama
+    ports:
+      - "8080:8080"
+    environment:
+      STREAMA_MYSQL_HOST: mysql
+      STREAMA_MYSQL_PORT: 3306
+      STREAMA_MYSQL_DB: streama
+      STREAMA_MYSQL_USER: streama
+      STREAMA_MYSQL_PASSWORD: streama
+    depends_on:
+      - mysql
